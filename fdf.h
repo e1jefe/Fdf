@@ -29,8 +29,8 @@
 #define KEY_DOWN 125
 #define KEY_LEFT 123
 #define KEY_RIGHT 124
-#define WIN_W 1280
-#define WIN_H 720
+#define WIN_W 1500
+#define WIN_H 1000
 
 typedef struct		s_cord
 {
@@ -42,21 +42,19 @@ typedef struct		s_cord
 
 typedef struct			s_lists
 {
-char **points;
+char **arr;
 struct 					s_lists *next;
 }						t_lists;
 
 typedef struct		s_mapinfo
 {
 	t_lists *start;
-	t_cord	*uk;
-	int		lines;
+	t_cord **points;
 	void	*mlx;
 	void	*win;
 	int		height;
 	int		width;
 	int		width2;
-	int		height2;
 }					t_mapinfo;
 
 //typedef double t_vec __attribute__((vector_size(sizeof(double)*3)));
@@ -64,6 +62,7 @@ static int     ft_keys(int key, void *zlx);
 int	count_columns(t_mapinfo *map, char *line);
 void			read_map(char *filename, t_mapinfo *map);
 void	ft_print_map(t_mapinfo *uk);
-int	count_lines(t_mapinfo *map);
-
+t_cord		new_point(double x, double y, double z);
+void init_point(char **arr, int i, t_mapinfo **map);
+void	ft_centremap(t_mapinfo *map);
 #endif
