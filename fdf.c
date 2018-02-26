@@ -12,14 +12,37 @@
 
 #include "fdf.h"
 
-static int     ft_keys(int key, void *zlx)
-{
-    t_mapinfo *mlx;
+ static void	key_scale(int key, t_mapinfo *map)
+ {
+	 if (key == 123)
+		 map->scale_x /= 1.01;
+	 if (key == 124)
+		 map->scale_x *= 1.01;
+	 if (key == 126)
+		 map->scale_x *= 1.01;
+	 if (key == 125)
+		 map->scale_x /= 1.01;
+	 //ZDES JOPA s WIDTH i HEIGHT !!!
+ }
 
-    printf("key = %d\n", key);
-    mlx = (t_mapinfo*)zlx;
+static int     ft_keys(int key, t_mapinfo *map)
+{
+    //t_mapinfo *mlx;
+	//t_mapinfo *points;
+
+	printf("key = %d\n", key);
+	printf("scale = %f\n", map->scale_x);
+   // mlx = (t_mapinfo*);
     if (key == 53)
         exit(0);
+	else if (key >= 123 && key <= 126)
+	{
+		key_scale(key, map);
+		scale_points(map, map->scale_x);
+		ft_draw(map);
+	}
+	//mlx_clear_window(map->mlx, map->win);
+//	ft_draw(map);
     return (0);
 
 }
@@ -85,7 +108,8 @@ void			read_map(char *filename, t_mapinfo *map)
 		if (map->width != map->width2)
 			exit(0);
 		push_back(&(map->start), list_new(ft_strsplit(line, ' ')));
-		printf("%s\n", line);
+		printf("read %d\t%d\t\n", map->height, map->width);
+		//printf("%s\n", line);
 		
 		free(line);
 	}
@@ -137,17 +161,17 @@ void init_point(char **arr, int i, t_mapinfo **map)
 	}
 }
 
- static void	ft_draw_instruct(t_mapinfo *map)
- {
-	 int	col;
-
-	 col = 0x00FFFFFF;
-	 mlx_string_put(map->mlx, map->win, 5, 5, col, "Q and E for y rotation");
-	 mlx_string_put(map->mlx, map->win, 5, 20, col, "A and D for x rotation");
-	 mlx_string_put(map->mlx, map->win, 5, 35, col, "W and S for z rotation");
-	 mlx_string_put(map->mlx, map->win, 5, 50, col,
-					"Arrows for scale. R to reset");
- }
+// static void	ft_draw_instruct(t_mapinfo *map)
+// {
+//	 int	col;
+//
+//	 col = 0x00FFFFFF;
+//	 mlx_string_put(map->mlx, map->win, 5, 5, col, "Q and E for y rotation");
+//	 mlx_string_put(map->mlx, map->win, 5, 20, col, "A and D for x rotation");
+//	 mlx_string_put(map->mlx, map->win, 5, 35, col, "W and S for z rotation");
+//	 mlx_string_put(map->mlx, map->win, 5, 50, col,
+//					"Arrows for scale. R to reset");
+// }
 
 void	ft_draw(t_mapinfo *map)
 {
@@ -165,7 +189,8 @@ void	ft_draw(t_mapinfo *map)
 		}
 		v++;
 	}
-	ft_draw_instruct(map);
+	printf("draw %d\t%d\t\n", map->height, map->width);
+//	ft_draw_instruct(map);
 }
 
  t_cord			**ft_mapcopy(t_mapinfo *map)
@@ -187,6 +212,7 @@ void	ft_draw(t_mapinfo *map)
 		 }
 		 l++;
 	 }
+	 printf("mapcopy %d\t%d\t\n", map->height, map->width);
 	 return (new);
  }
 
@@ -212,25 +238,16 @@ void	ft_draw(t_mapinfo *map)
 //
 // void ft_init_map(t_mapinfo *map)
 // {
+// map->rot_x = 245;
+// map->rot_y = 110;
+// map->rot_z = -125;
 //
 //	 scale_points(&map, map->scale_x, map->scale_y);
 //	 ft_centr_cord(&map);
 //	 ft_draw(map);
 // }
 //
-// void			free_map(t_mapinfo map)
-// {
-//	 int		v;
-//
-//	 v = 0;
-//	 while (v < map->height)
-//	 {
-//		 free(map->points[v]);
-//		 v++;
-//	 }
-//	 free(map->points);
-//	 map->points = NULL;
-// }
+
 
  void	ft_centr_cord(t_mapinfo *map)
  {
@@ -240,6 +257,7 @@ void	ft_draw(t_mapinfo *map)
 	 double offset_y;
 
 	 i = 0;
+	 printf("centrcord%d\t%d\t\n", map->height, map->width);
 	 offset_x = map->points[map->height / 2][map->width / 2].x;
 	 offset_y = map->points[map->height / 2][map->width / 2].y;
 	 while (i < map->height)
@@ -248,34 +266,35 @@ void	ft_draw(t_mapinfo *map)
 		 while (k < map->width)
 		 {
 			 map->points[i][k].x -= offset_x;
-			 map->points[i][k].x += WIN_W / 2;
+			 map->points[i][k].x += WIN_W / 2.0;
 			 map->points[i][k].y -= offset_y;
-			 map->points[i][k].y += WIN_H / 2;
+			 map->points[i][k].y += WIN_H / 2.0;
 			 k++;
 		 }
 		 i++;
 	 }
  }
 
-// void		scale_points(t_mapinfo *map, int scale_x, int scale_y)
-// {
-//	 int i;
-//	 int	k;
-//
-//	 i = 0;
-//	 while (i < map->height)
-//	 {
-//		 k = 0;
-//		 while (k < map->width)
-//		 {
-//			 map->points[i][k].x *= scale_x;
-//			 map->points[i][k].y *= scale_y;
-//			 map->points[i][k].z *= scale_x;
-//			 k++;
-//		 }
-//		 i++;
-//	 }
-// }
+ void		scale_points(t_mapinfo *map, double scale_x)
+ {
+	 int	i;
+	 int	j;
+//ZDES JOPA s WIDTH i HEIGHT !!!
+	 i = 0;
+	 printf("scale_p\t%d\t%d\t\n", map->height, map->width);
+	 while (i < map->height)
+	 {
+		 j = 0;
+		 while (j < map->width)
+		 {
+			 map->points[i][j].x *= scale_x;
+			 map->points[i][j].y *= scale_x;
+			 map->points[i][j].z *= scale_x;
+			 j++;
+		 }
+		 i++;
+	 }
+ }
 
 void ft_create_map(t_mapinfo **map, char *file)
  {
@@ -322,9 +341,13 @@ int main(int argc, char **argv)
 	ft_centr_cord(map);
    map->mlx = mlx_init();
    map->win = mlx_new_window(map->mlx, WIN_W, WIN_H, "FdF");
+	printf("main %d\t%d\t\n", map->height, map->width);
+	map->scale_x = 1.0;
    ft_draw(map);
 	//ft_init_map(map);
-   mlx_hook(map->win, 2, 5, ft_keys, &map);
+//	scale_points(map, map->scale_x);
+	printf("scale main %f\n", map->scale_x);
+   mlx_hook(map->win, 2, 5, ft_keys, map);
    mlx_loop(map->mlx);
     return (0);
 }

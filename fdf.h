@@ -57,20 +57,20 @@ typedef struct		s_mapinfo
 	int		height;
 	int		width;
 	int		width2;
-	int		scale_x;
-	int		scale_y;
-	float	rot_x;
-	float	rot_y;
-	float	rot_z;
+	double	scale_x;
+//	float	rot_x;
+//	float	rot_y;
+//	float	rot_z;
 }					t_mapinfo;
 
 //typedef double t_vec __attribute__((vector_size(sizeof(double)*3)));
-static int		ft_keys(int key, void *zlx);
+static int		ft_keys(int key, t_mapinfo *map);
 int				count_columns(t_mapinfo *map, char *line);
 void			read_map(char *filename, t_mapinfo *map);
 void			ft_print_map(t_mapinfo *uk);
 t_cord			new_point(double x, double y, double z);
 void			init_point(char **arr, int i, t_mapinfo **map);
 void			ft_centr_cord(t_mapinfo *map);
-void		scale_points(t_mapinfo *map, int scale_x, int scale_y);
+void		scale_points(t_mapinfo *map, double scale_x);
+void	ft_draw(t_mapinfo *map);
 #endif
