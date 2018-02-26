@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/dsheptun/Fdf/fdf.c" "/Users/dsheptun/Fdf/cmake-build-debug/CMakeFiles/Fdf.dir/fdf.c.o"
+  "/Users/dsheptun/Fdf/keys.c" "/Users/dsheptun/Fdf/cmake-build-debug/CMakeFiles/Fdf.dir/keys.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

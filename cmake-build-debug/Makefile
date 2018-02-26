@@ -150,6 +150,33 @@ fdf.c.s:
 	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/fdf.c.s
 .PHONY : fdf.c.s
 
+keys.o: keys.c.o
+
+.PHONY : keys.o
+
+# target to build an object file
+keys.c.o:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/keys.c.o
+.PHONY : keys.c.o
+
+keys.i: keys.c.i
+
+.PHONY : keys.i
+
+# target to preprocess a source file
+keys.c.i:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/keys.c.i
+.PHONY : keys.c.i
+
+keys.s: keys.c.s
+
+.PHONY : keys.s
+
+# target to generate assembly for a file
+keys.c.s:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/keys.c.s
+.PHONY : keys.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... fdf.o"
 	@echo "... fdf.i"
 	@echo "... fdf.s"
+	@echo "... keys.o"
+	@echo "... keys.i"
+	@echo "... keys.s"
 .PHONY : help
 
 

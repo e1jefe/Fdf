@@ -88,6 +88,9 @@
 		<Unit filename="/Users/dsheptun/Fdf/fdf.h">
 			<Option target="Fdf"/>
 		</Unit>
+		<Unit filename="/Users/dsheptun/Fdf/keys.c">
+			<Option target="Fdf"/>
+		</Unit>
 		<Unit filename="/Users/dsheptun/Fdf/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

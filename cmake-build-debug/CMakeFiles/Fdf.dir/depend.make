@@ -5,3 +5,7 @@ CMakeFiles/Fdf.dir/fdf.c.o: ../fdf.c
 CMakeFiles/Fdf.dir/fdf.c.o: ../fdf.h
 CMakeFiles/Fdf.dir/fdf.c.o: ../libft/libft.h
 
+CMakeFiles/Fdf.dir/keys.c.o: ../fdf.h
+CMakeFiles/Fdf.dir/keys.c.o: ../keys.c
+CMakeFiles/Fdf.dir/keys.c.o: ../libft/libft.h
+

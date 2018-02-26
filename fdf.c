@@ -89,19 +89,16 @@ void			read_map(char *filename, t_mapinfo *map)
 		
 		free(line);
 	}
-	printf("%d\n", map->height);
-	printf("%d\n", map->width);
-	printf("%d\n", map->width2);
 	close(fd);
 }
 
 void	ft_print_map(t_mapinfo *map)
 {
 	t_lists *start = map->start;
-	char **res;
+	//char **res;
 	while (start)
 	{
-		res = start->arr;
+		//res = start->arr;
 		start = start->next;
 	}
 }
@@ -135,10 +132,22 @@ void init_point(char **arr, int i, t_mapinfo **map)
 	(*map)->points[i] = (t_cord*)malloc(sizeof(t_cord) * (*map)->width);
 	while (y < (*map)->width)
 	{
-		(*map)->points[i][y] = new_point(y * 30 , i * 30 , ft_atoi(arr[y]));
+		(*map)->points[i][y] = new_point(y * SCALE , i * SCALE , ft_atoi(arr[y]));
 		y++;
 	}
 }
+
+ static void	ft_draw_instruct(t_mapinfo *map)
+ {
+	 int	col;
+
+	 col = 0x00FFFFFF;
+	 mlx_string_put(map->mlx, map->win, 5, 5, col, "Q and E for y rotation");
+	 mlx_string_put(map->mlx, map->win, 5, 20, col, "A and D for x rotation");
+	 mlx_string_put(map->mlx, map->win, 5, 35, col, "W and S for z rotation");
+	 mlx_string_put(map->mlx, map->win, 5, 50, col,
+					"Arrows for scale. R to reset");
+ }
 
 void	ft_draw(t_mapinfo *map)
 {
@@ -156,29 +165,74 @@ void	ft_draw(t_mapinfo *map)
 		}
 		v++;
 	}
+	ft_draw_instruct(map);
 }
 
-int	ft_argcheck(int argc, char **argv)
-{
-	if (argc == 2)
-		return (2);
-	if (argc != 4)
-	{
-		printf("Usage : ./fdf <filename> [ case_size z_size ]\n");
-		return (-1);
-	}
-	else
-	{
-		if ((ft_atoi(argv[2]) == 0) || (ft_atoi(argv[3]) == 0))
-		{
-			printf("Usage : ./fdf <filename> [ case_size z_size ]\n");
-			return (-1);
-		}
-	}
-	return (0);
-}
+ t_cord			**ft_mapcopy(t_mapinfo *map)
+ {
+	 int		l;
+	 int		c;
+	 t_cord	**new;
 
- void	ft_centremap(t_mapinfo *map)
+	 l = 0;
+	 new = (t_cord**)malloc(sizeof(t_cord*) * map->height);
+	 while (l < map->height)
+	 {
+		 new[l] = (t_cord*)malloc(sizeof(t_cord) * map->width);
+		 c = 0;
+		 while (c < map->width)
+		 {
+			 new[l][c] = map->points[l][c];
+			 c++;
+		 }
+		 l++;
+	 }
+	 return (new);
+ }
+
+//int	ft_argcheck(int argc, char **argv)
+//{
+//	if (argc == 2)
+//		return (2);
+//	if (argc != 4)
+//	{
+//		printf("Usage : ./fdf <filename> [ case_size z_size ]\n");
+//		return (-1);
+//	}
+//	else
+//	{
+//		if ((ft_atoi(argv[2]) == 0) || (ft_atoi(argv[3]) == 0))
+//		{
+//			printf("Usage : ./fdf <filename> [ case_size z_size ]\n");
+//			return (-1);
+//		}
+//	}
+//	return (0);
+//}
+//
+// void ft_init_map(t_mapinfo *map)
+// {
+//
+//	 scale_points(&map, map->scale_x, map->scale_y);
+//	 ft_centr_cord(&map);
+//	 ft_draw(map);
+// }
+//
+// void			free_map(t_mapinfo map)
+// {
+//	 int		v;
+//
+//	 v = 0;
+//	 while (v < map->height)
+//	 {
+//		 free(map->points[v]);
+//		 v++;
+//	 }
+//	 free(map->points);
+//	 map->points = NULL;
+// }
+
+ void	ft_centr_cord(t_mapinfo *map)
  {
 	 int	i;
 	 int	k;
@@ -203,36 +257,73 @@ int	ft_argcheck(int argc, char **argv)
 	 }
  }
 
+// void		scale_points(t_mapinfo *map, int scale_x, int scale_y)
+// {
+//	 int i;
+//	 int	k;
+//
+//	 i = 0;
+//	 while (i < map->height)
+//	 {
+//		 k = 0;
+//		 while (k < map->width)
+//		 {
+//			 map->points[i][k].x *= scale_x;
+//			 map->points[i][k].y *= scale_y;
+//			 map->points[i][k].z *= scale_x;
+//			 k++;
+//		 }
+//		 i++;
+//	 }
+// }
+
+void ft_create_map(t_mapinfo **map, char *file)
+ {
+	 t_lists *tmp;
+	 int i;
+
+	 *map = ft_memalloc(sizeof(t_mapinfo));
+	 read_map(file, *map);
+	 ft_print_map(*map);
+	 i = 0;
+	 tmp = (*map)->start;
+	 (*map)->points = (t_cord**)malloc(sizeof(t_cord*) * (*map)->height);
+	 while (i < (*map)->height)
+	 {
+		 init_point(tmp->arr, i, map);
+		 tmp = tmp->next;
+		 i++;
+	 }
+	 (*map)->base = ft_mapcopy(*map);
+ }
 int main(int argc, char **argv) 
 {
-	int err;
-	t_lists *tmp;
-	int i;
+//	t_lists *tmp;
+//	int i;
     
 	t_mapinfo	*map;
 		if (argc != 2)
 	{
 		return (-1);
 	}
-	map = ft_memalloc(sizeof(t_mapinfo));
-	read_map(argv[1], map);
-	err = (ft_argcheck(argc, argv));
-	ft_print_map(map);
-	i = 0;
-	tmp = map->start;
-	map->points = (t_cord**)malloc(sizeof(t_cord*) * map->height);
-	while (i < map->height)
-	{
-		init_point(tmp->arr, i, &map);
-		tmp = tmp->next;
-		i++;
-	}
-	//map->height = count_lines(map);
-	//map->widht = count_columns(map);
+//	map = ft_memalloc(sizeof(t_mapinfo));
+//	read_map(argv[1], map);
+//	ft_print_map(map);
+//	i = 0;
+//	tmp = map->start;
+//	map->points = (t_cord**)malloc(sizeof(t_cord*) * map->height);
+//	while (i < map->height)
+//	{
+//		init_point(tmp->arr, i, &map);
+//		tmp = tmp->next;
+//		i++;
+//	}
+	ft_create_map(&map, argv[1]);
+	ft_centr_cord(map);
    map->mlx = mlx_init();
    map->win = mlx_new_window(map->mlx, WIN_W, WIN_H, "FdF");
-	ft_centremap(map);
    ft_draw(map);
+	//ft_init_map(map);
    mlx_hook(map->win, 2, 5, ft_keys, &map);
    mlx_loop(map->mlx);
     return (0);

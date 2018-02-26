@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Fdf.dir/fdf.c.o"
+  "CMakeFiles/Fdf.dir/keys.c.o"
   "Fdf.pdb"
   "Fdf"
 )
