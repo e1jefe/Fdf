@@ -177,6 +177,33 @@ keys.c.s:
 	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/keys.c.s
 .PHONY : keys.c.s
 
+rotation.o: rotation.c.o
+
+.PHONY : rotation.o
+
+# target to build an object file
+rotation.c.o:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/rotation.c.o
+.PHONY : rotation.c.o
+
+rotation.i: rotation.c.i
+
+.PHONY : rotation.i
+
+# target to preprocess a source file
+rotation.c.i:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/rotation.c.i
+.PHONY : rotation.c.i
+
+rotation.s: rotation.c.s
+
+.PHONY : rotation.s
+
+# target to generate assembly for a file
+rotation.c.s:
+	$(MAKE) -f CMakeFiles/Fdf.dir/build.make CMakeFiles/Fdf.dir/rotation.c.s
+.PHONY : rotation.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +219,9 @@ help:
 	@echo "... keys.o"
 	@echo "... keys.i"
 	@echo "... keys.s"
+	@echo "... rotation.o"
+	@echo "... rotation.i"
+	@echo "... rotation.s"
 .PHONY : help
 
 

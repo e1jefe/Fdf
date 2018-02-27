@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Fdf.dir/fdf.c.o"
   "CMakeFiles/Fdf.dir/keys.c.o"
+  "CMakeFiles/Fdf.dir/rotation.c.o"
   "Fdf.pdb"
   "Fdf"
 )

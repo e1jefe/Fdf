@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/Users/dsheptun/Fdf/fdf.c" "/Users/dsheptun/Fdf/cmake-build-debug/CMakeFiles/Fdf.dir/fdf.c.o"
   "/Users/dsheptun/Fdf/keys.c" "/Users/dsheptun/Fdf/cmake-build-debug/CMakeFiles/Fdf.dir/keys.c.o"
+  "/Users/dsheptun/Fdf/rotation.c" "/Users/dsheptun/Fdf/cmake-build-debug/CMakeFiles/Fdf.dir/rotation.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

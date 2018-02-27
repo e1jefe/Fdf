@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -lmlx -framework OpenGL -framework AppKit")
 
-set(SOURCE_FILES fdf.c fdf.h keys.c)
+set(SOURCE_FILES fdf.c fdf.h keys.c rotation.c)
 
 add_executable(Fdf ${SOURCE_FILES})
 

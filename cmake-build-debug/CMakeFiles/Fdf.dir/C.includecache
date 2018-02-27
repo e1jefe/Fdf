@@ -19,6 +19,8 @@ unistd.h
 -
 stdlib.h
 -
+math.h
+-
 sys/types.h
 -
 sys/stat.h
@@ -45,4 +47,8 @@ sys/uio.h
 -
 fcntl.h
 -
+
+/Users/dsheptun/Fdf/rotation.c
+fdf.h
+/Users/dsheptun/Fdf/fdf.h
 

@@ -9,3 +9,7 @@ CMakeFiles/Fdf.dir/keys.c.o: ../fdf.h
 CMakeFiles/Fdf.dir/keys.c.o: ../keys.c
 CMakeFiles/Fdf.dir/keys.c.o: ../libft/libft.h
 
+CMakeFiles/Fdf.dir/rotation.c.o: ../fdf.h
+CMakeFiles/Fdf.dir/rotation.c.o: ../libft/libft.h
+CMakeFiles/Fdf.dir/rotation.c.o: ../rotation.c
+
