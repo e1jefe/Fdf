@@ -59,6 +59,8 @@ typedef struct		s_mapinfo
 	float	rot_x;
 	float	rot_y;
 	float	rot_z;
+	double centr_x;
+	double centr_y;
 }					t_mapinfo;
 
 //typedef double t_vec __attribute__((vector_size(sizeof(double)*3)));
@@ -75,4 +77,5 @@ void			scale_points(t_mapinfo *map, double scale_plus);
 void			rotate_x(float angle, t_mapinfo *map);
 void			rotate_y(float angle, t_mapinfo *map);
 void			rotate_z(float angle, t_mapinfo *map);
+void			ft_current_centr_cord(t_mapinfo *map);
 #endif

@@ -58,6 +58,7 @@
 
 static int     ft_keys(int key, t_mapinfo *map)
 {
+
 	printf("key = %d\n", key);
 	printf("scale = %f\n", map->scale_x);
     if (key == 53)
@@ -72,7 +73,9 @@ static int     ft_keys(int key, t_mapinfo *map)
 	{
 		ft_key_scale(key, map);
 		scale_points(map, map->scale_plus);
-		//ft_draw(map);
+//		ft_current_centr_cord(map);
+//		ft_centr_cord(map);
+//		ft_draw(map);
 	}
 	else if (key >= 0 && key <= 14)
 	{
@@ -80,6 +83,7 @@ static int     ft_keys(int key, t_mapinfo *map)
 		rotate_x(map->rot_x, map);
 		rotate_y(map->rot_y, map);
 		rotate_z(map->rot_z, map);
+//		ft_centr_cord(map);
 	//	ft_draw(map);
 	}
 	mlx_clear_window(map->mlx, map->win);
@@ -209,7 +213,7 @@ void init_point(char **arr, int i, t_mapinfo **map)
 	 mlx_string_put(map->mlx, map->win, 5, 20, col, "A and D for x rotation");
 	 mlx_string_put(map->mlx, map->win, 5, 35, col, "W and S for z rotation");
 	 mlx_string_put(map->mlx, map->win, 5, 50, col,
-					"Arrows for move. R to reset. + && - for scale");
+					"Arrows for move. R to reset. 1 && 2 for scale");
  }
 
 void	ft_draw(t_mapinfo *map)
@@ -275,17 +279,51 @@ void	ft_draw(t_mapinfo *map)
 //
  void ft_init_map(t_mapinfo *map)
  {
-// map->rot_x = 245;
-// map->rot_y = 110;
-// map->rot_z = -125;
+ map->rot_x = 245;
+ map->rot_y = 110;
+ map->rot_z = -125;
 //	 map->scale_x = 0.0;
 //	 map->scale_y = 0.0;
-
+//	 scale_points(map->base, map->scale_plus);
+//	 rotate_x(map->rot_x, map->base);
+//	 rotate_y(map->rot_y, map->base);
+//	 rotate_z(map->rot_z, map->base);
 	 //scale_points(&map, map->scale_x, map->scale_y);
-	 ft_centr_cord(map);
+//	 scale_points(map, map->scale_plus);
+//	 ft_centr_cord(map);
+//	 rotate_x(map->rot_x, map);
+//	 rotate_y(map->rot_y, map);
+//	 rotate_z(map->rot_z, map);
 //	 ft_draw(map);
+
+
  }
-//
+
+ void	ft_current_centr_cord(t_mapinfo *map)
+ {
+	 int i;
+	 int k;
+	 double centr_x;
+	 double centr_y;
+
+	  i = 0;
+
+	 centr_x = (WIN_W - (map->width + SCALE * (map->width - 1))) / 2;
+	 centr_y = (WIN_H - (map->height + SCALE * (map->height - 1))) / 2;
+	 while (i < map->height)
+	 {
+		 k = 0;
+		 while (k < map->width)
+		 {
+			 map->points[i][k].x -= centr_x;
+			 map->points[i][k].x += WIN_W / 2.0;
+			 map->points[i][k].y -= centr_y;
+			 map->points[i][k].y += WIN_H / 2.0;
+			 k++;
+		 }
+		 i++;
+	 }
+ }
 
 
  void	ft_centr_cord(t_mapinfo *map)
@@ -328,7 +366,7 @@ void	ft_draw(t_mapinfo *map)
 		 {
 			 map->points[i][j].x *= scale_plus;
 			 map->points[i][j].y *= scale_plus;
-//			 map->points[i][j].z *= scale_plus;
+			 map->points[i][j].z *= scale_plus;
 			 j++;
 		 }
 		 i++;
