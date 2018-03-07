@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:18:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 16:25:55 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:09:07 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 #include "./minilibx/mlx.h"
 #define WIN_W 1500
 #define WIN_H 1000
-#define DEFAULT_SCALE 20
-#define ANG 5
+#define ANG 7
 
 typedef struct		s_point
 {

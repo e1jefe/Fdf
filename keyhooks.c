@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:34:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 16:19:12 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:22:53 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ static void	key_rot(int key, t_mapinfo *map)
 static void	key_scale(int key, t_mapinfo *map)
 {
 	if (key == 34)
-		map->scale_x -= 1;
+		map->scale_x -= 2;
 	if (key == 38)
-		map->scale_x += 1;
+		map->scale_x += 2;
 	if (key == 37)
-		map->scale_y += 1;
+		map->scale_y += 2;
 	if (key == 40)
-		map->scale_y -= 1;
+		map->scale_y -= 2;
 }
 
 static void	key_res(t_mapinfo *map)
 {
-	map->rot_y = 110;
-	map->rot_z = -125;
-	map->rot_x = 245;
 	map->scale_x = map->stock_x;
 	map->scale_y = map->stock_y;
+	map->rot_y = 111;
+	map->rot_z = -126;
+	map->rot_x = 246;
 }
 
 static void	key_move(int key, t_mapinfo *map)

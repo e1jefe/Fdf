@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:34:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 17:27:34 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:08:41 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void			cr_map(t_mapinfo *map, char **argv, int error)
 	}
 	else
 	{
-		map->scale_x = DEFAULT_SCALE;
-		map->scale_y = DEFAULT_SCALE;
+		map->scale_x = 20;
+		map->scale_y = 20;
 	}
 	map->stock_x = map->scale_x;
 	map->stock_y = map->scale_y;
