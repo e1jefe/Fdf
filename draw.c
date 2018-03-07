@@ -1,39 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/06 17:00:00 by dsheptun          #+#    #+#             */
+/*   Updated: 2018/03/07 17:25:48 by dsheptun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-static float	ft_fabs(float a)
+static void	draw_helper(t_mapinfo map)
 {
-	if (a < 0)
-		return (-a);
-	return (a);
+	int	col;
+
+	col = 0x00FF98FF;
+	mlx_string_put(map.mlx, map.win, 4, 6, col, "Q and E for y rotation");
+	mlx_string_put(map.mlx, map.win, 4, 21, col, "A and D for x rotation");
+	mlx_string_put(map.mlx, map.win, 4, 36, col, "W and S for z rotation");
+	mlx_string_put(map.mlx, map.win, 4, 51, col,
+		"I, J, K, L for scale. Arrows for move.");
+	mlx_string_put(map.mlx, map.win, 4, 65, 0xFF0000, "R to reset");
 }
 
-static float	ft_fmax(float a, float b)
+void		draw_map(t_mapinfo map)
 {
-	if (a > b)
-		return (a);
-	return (b);
-}
+	int		i;
+	int		j;
 
-void			draw_line(t_coord v1, t_coord v2, t_mapinfo *m)
-{
-	float	step;
-	float	t;
-	int		col;
-	t_coord	sum;
-
-	t = 0;
-	if (v1.col == 1 && v2.col == 1)
-		col = 0x00FF0000;
-	else
-		col = 0x808080;
-	step = (float)(1 / (ft_fmax(ft_fabs(v1.x - v2.x), ft_fabs(v1.z - v2.z)) *
-				2));
-	while (t <= 1)
+	j = 0;
+	while (j < map.height)
 	{
-		sum.x = v1.x + t * (v2.x - v1.x);
-		sum.y = v1.y + t * (v2.y - v1.y);
-		sum.z = v1.z + t * (v2.z - v1.z);
-		mlx_pixel_put(m->mlx, m->win, sum.x, sum.z, col);
-		t = t + step;
+		i = 0;
+		while (i < map.width)
+		{
+			if (j < map.height - 1)
+				draw_line(map.points[j][i], map.points[j + 1][i], &map);
+			if (i < map.width - 1)
+				draw_line(map.points[j][i], map.points[j][i + 1], &map);
+			i++;
+		}
+		j++;
 	}
+	draw_helper(map);
+}
+
+void		init_map(t_mapinfo *map)
+{
+	t_mapinfo mapcpy;
+
+	map->scale_pv = 0;
+	map->scale_pg = 0;
+	map->rot_x = 245;
+	map->rot_y = 115;
+	map->rot_z = -125;
+	mapcpy = *map;
+	mapcpy.points = ft_mapcopy(map);
+	scale_points(&mapcpy, map->scale_x, map->scale_y);
+	rot_x(map->rot_x, &mapcpy);
+	rot_y(map->rot_y, &mapcpy);
+	rot_z(map->rot_z, &mapcpy);
+	centrmap(&mapcpy);
+	draw_map(mapcpy);
+	free_map(mapcpy);
 }
