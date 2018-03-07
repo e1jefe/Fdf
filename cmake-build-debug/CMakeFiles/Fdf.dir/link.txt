@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -lmlx -framework OpenGL -framework AppKit -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/Fdf.dir/fdf.c.o CMakeFiles/Fdf.dir/keys.c.o CMakeFiles/Fdf.dir/rotation.c.o  -o Fdf ../libft/libft.a 
