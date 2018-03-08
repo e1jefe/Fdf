@@ -6,20 +6,20 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:18:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 19:09:07 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/08 14:54:07 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
-#include <libc.h>
-#include <math.h>
-#include "./libft/libft.h"
-#include "./minilibx/mlx.h"
-#define WIN_W 1500
-#define WIN_H 1000
-#define ANG 7
+# include <libc.h>
+# include <math.h>
+# include "./libft/libft.h"
+# include "./minilibx/mlx.h"
+# define WIN_W 1500
+# define WIN_H 1000
+# define ANG 7
 
 typedef struct		s_point
 {

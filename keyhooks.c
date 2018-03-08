@@ -65,8 +65,6 @@ int			key_hook(int key, t_mapinfo *map)
 {
 	t_mapinfo copy;
 
-	copy = *map;
-	copy.points = ft_mapcopy(map);
 	if (key == 53 || key == 15)
 		key == 53 ? exit(0) : key_res(map);
 	if (key >= 0 && key <= 14)
@@ -75,11 +73,13 @@ int			key_hook(int key, t_mapinfo *map)
 		key_scale(key, map);
 	if (key >= 123 && key <= 126)
 		key_move(key, map);
-	mlx_clear_window(0, map->win);
+	copy = *map;
+	copy.points = ft_mapcopy(map);
 	scale_points(&copy, copy.scale_x, copy.scale_y);
 	rot_point(map, &copy);
 	centrmap(&copy);
 	move_points(&copy);
+	mlx_clear_window(0, map->win);
 	draw_map(copy);
 	free_map(copy);
 	return (0);

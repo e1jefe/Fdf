@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 10:34:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 19:08:41 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/08 14:53:43 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 static int		numbers(char *str)
 {
-	int	i;
-	int cnt;
+	int		i;
+	int		cnt;
+	char	**z;
 
+	z = ft_strsplit(str, ' ');
 	i = 0;
 	cnt = 0;
-	while (str[i] != '\0')
+	while (z[i])
 	{
-		if (ft_isdigit(str[i]))
-		{
-			cnt++;
-			while ((ft_isdigit(str[i]) && str[i])
-					|| str[i] == ',' || str[i] == 'x'
-				|| ((*str == '-') && ft_isdigit(*(str + 1))))
-				i++;
-		}
-		else
-			i++;
+		free(z[i]);
+		cnt++;
+		i++;
 	}
+	free(z);
 	return (cnt);
 }
 
@@ -41,9 +37,9 @@ void			ft_map(t_mapinfo *map, t_point ***cloud, int i)
 	char	**split_line;
 	t_point	**new;
 
-	map->width = numbers(map->map[i]);
+	map->width = numbers(map->map[i--]);
 	new = (t_point**)malloc(sizeof(t_point*) * map->height);
-	while (i < map->height)
+	while (++i < map->height)
 	{
 		if (map->width != numbers(map->map[i]))
 		{
@@ -51,15 +47,14 @@ void			ft_map(t_mapinfo *map, t_point ***cloud, int i)
 			exit(0);
 		}
 		new[i] = (t_point*)malloc(sizeof(t_point) * map->width);
-		j = 0;
+		j = -1;
 		split_line = ft_strsplit(map->map[i], ' ');
-		while (j < map->width)
+		while (++j < map->width)
 		{
 			new[i][j] = new_point(j, ft_atoi(split_line[j]), i);
-			j++;
+			free(split_line[j]);
 		}
 		free(split_line);
-		i++;
 	}
 	*cloud = new;
 }

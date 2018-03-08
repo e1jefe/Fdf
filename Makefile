@@ -6,25 +6,30 @@ FILES = struct.c draw.c draw_line.c\
 
 OBJECTS = $(FILES:.c=.o)
 
+LIBFT = libft/libft.a
+
 CFLAG = -Wall -Werror -Wextra
 
 ATTACH = -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME):
-	make -C libft/ fclean
-	make -C libft/
-	gcc $(CFLAG) -I libft/ -c $(FILES)
+%.o: %.c
+	gcc $(CFLAG) -c $< -o $@
+
+$(NAME): $(LIBFT) $(OBJECTS)
 	gcc $(CFLAG) -o $(NAME) $(OBJECTS) $(ATTACH)
+
+$(LIBFT):
+	make -C libft/
 
 clean:
 	/bin/rm -f $(OBJECTS)
-	make -C libft/ clean
+	make clean -C libft
 
 fclean: clean
 	/bin/rm -f $(NAME)
-	make -C libft/ fclean
+	make fclean -C libft
 
 re: fclean all
 

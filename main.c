@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:18:52 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/07 17:33:05 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/08 14:52:13 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		ft_bzero(&map, sizeof(t_mapinfo));
 		map = reader_map(argv[1]);
 		error = (check_error(argc, argv));
 		cr_map(&map, argv, error);
