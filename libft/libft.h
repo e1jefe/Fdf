@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/22 20:24:21 by rchiorea          #+#    #+#             */
-/*   Updated: 2017/12/22 12:28:14 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/09 12:10:26 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <fcntl.h>
-
 
 # define BUFF_SIZE 1
 

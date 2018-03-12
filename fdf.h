@@ -6,7 +6,7 @@
 /*   By: dsheptun <dsheptun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 12:18:13 by dsheptun          #+#    #+#             */
-/*   Updated: 2018/03/08 14:54:07 by dsheptun         ###   ########.fr       */
+/*   Updated: 2018/03/09 12:11:33 by dsheptun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <libc.h>
 # include <math.h>
 # include "./libft/libft.h"
-# include "./minilibx/mlx.h"
+# include <mlx.h>
 # define WIN_W 1500
 # define WIN_H 1000
 # define ANG 7
@@ -40,8 +40,8 @@ typedef struct		s_mapinfo
 	t_point	**points;
 	int		scale_x;
 	int		scale_y;
-	int 	scale_pg;
-	int 	scale_pv;
+	int		scale_pg;
+	int		scale_pv;
 	float	rot_x;
 	float	rot_y;
 	float	rot_z;
